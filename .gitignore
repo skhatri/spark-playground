@@ -1,0 +1,19 @@
+# idea
+.idea
+out
+*.iml
+*.iws
+*.ipr
+
+# gradle
+.gradle
+build
+
+# data
+minio-data
+dataset
+*.csv.gz
+metastore_db
+
+*.log
+
