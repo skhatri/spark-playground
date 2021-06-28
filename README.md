@@ -11,13 +11,17 @@ Fetch airbnb data
 ```
 ./fetch.sh
 ```
-### Preparing Environment
-Start a Minio container for S3
-```
-docker-compose up -d
-```
-create test bucket
 
+### Preparing Environment
+Make a copy of .env.template and save it as .env.
+Update AWS key if not using minio.
+Start relevant containers like minio, hive, postgres depending on the properties in .env
+
+```
+./start.sh
+```
+
+create test bucket
 ```
 ./s3.sh mb s3://spark-by-example
 ```
@@ -42,6 +46,7 @@ docker-compose down
 ```
 
 ### Running against Hive and S3
+
 ```
 AWS_ACCESS_KEY_ID=A****
 AWS_SECRET_ACCESS_KEY=***
