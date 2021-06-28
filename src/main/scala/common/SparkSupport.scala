@@ -30,9 +30,16 @@ trait SparkSupport {
     )
   }
 
-  def getOrCreate(name:String, master:String) = SparkSession.builder().master(master).appName(name)
-    .config("spark.sql.catalogImplementation", "hive")
-    .config("spark.sql.warehouse.dir", "/tmp/spark-warehouse")
+  lazy private val hiveConfigMap:Map[String, String] = {
+
+    val hiveUri = Option(System.getenv("HIVE_METASTORE_URI")).map(v => Map("hive.metastore.uris" -> v)).getOrElse(Map.empty[String,String])
+    Map("spark.sql.catalogImplementation" -> "hive",
+      "spark.sql.warehouse.dir" -> "%s/spark-warehouse".format(System.getProperty("java.io.tmpdir"))
+    ) ++ hiveUri
+  }
+
+  def getOrCreate(name: String, master: String) = SparkSession.builder().master(master).appName(name)
+    .config(new SparkConf().setAll(hiveConfigMap))
     .config(new SparkConf().setAll(sparkConfigMap))
     .config(new SparkConf().setAll(secretsConfig))
     .getOrCreate()

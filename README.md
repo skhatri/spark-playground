@@ -19,7 +19,7 @@ docker-compose up -d
 create test bucket
 
 ```
-./s3.sh mb s3://spark-data-lake
+./s3.sh mb s3://spark-by-example
 ```
 
 ### Running Tests
@@ -29,11 +29,11 @@ Runs various read/write tests against each version of spark
 ```
 
 ```
-./s3.sh ls s3://spark-data-lake --recursive
+./s3.sh ls s3://spark-by-example --recursive
 ```
 
 View through
-http://localhost:9000/minio/spark-data-lake/
+http://localhost:9000/minio/spark-by-example/
 
 ### Cleaning up
 
@@ -41,3 +41,9 @@ http://localhost:9000/minio/spark-data-lake/
 docker-compose down
 ```
 
+### Running against Hive and S3
+```
+AWS_ACCESS_KEY_ID=A****
+AWS_SECRET_ACCESS_KEY=***
+HIVE_METASTORE_URI=thrift://localhost:9083
+```

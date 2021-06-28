@@ -17,3 +17,9 @@ metastore_db
 
 *.log
 
+#env file
+.env
+hive-site.xml
+docker-compose.yaml
+hive/data
+
